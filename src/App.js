@@ -9,7 +9,8 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(populateProduce());
-  }, []);
+
+  }, [dispatch]);
 
   return (
     <>

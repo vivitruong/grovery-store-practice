@@ -7,16 +7,31 @@ export const populateProduce = () => {
         produce: produceData
     }
 };
+const LIKE_UNLIKE = "product/likeUnlike"
+export const likeUnlike = (produceId) => {
+    return {
+        type: LIKE_UNLIKE,
+        produceId
+    }
+};
+
+export const getAllProduce = (state) => Object.values(state.produce);
+
 
 export default function produceReducer(state = {} , action) {
 
+    const newState = {...state};
     switch(action.type) {
         case POPULATE:
-            const newState = {};
+
             action.produce.forEach(produce => {
                 newState[produce.id] = produce;
             });
             return newState;
+        case LIKE_UNLIKE:
+            newState[action.produceId].liked = !newState[action.produceId].liked;
+            return newState;
+
         default:
             return state;
     }
